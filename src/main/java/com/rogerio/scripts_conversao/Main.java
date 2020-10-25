@@ -58,13 +58,21 @@ public class Main {
                 
         writeTextFile(writingFileName,newKMLfile.getKMLfileContentAsString());
         
+        //=============================================================================================        
+//        ArrayList<String> CSVfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\dia_26_G2.csv");
+//        
+//        CSV_To_Delta_ENU csvLatLonToECEFenuValues = new CSV_To_Delta_ENU(CSVfile);
+//        csvLatLonToECEFenuValues.compute_discrepancies();
         //=============================================================================================
         
-        ArrayList<String> CSVfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\dia_26_G2.csv");
-        
-        CSV_To_Delta_ENU csvLatLonToECEFenuValues = new CSV_To_Delta_ENU(CSVfile);
-        csvLatLonToECEFenuValues.compute_discrepancies();
-        
+///
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        // FOR THE ARTICLE !!!!!!!!!!!!!!!!!!!!!!
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        ///
+        ArrayList<String> SPPfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\RESULT_dia_26_mi9.txt");
+        SPPresult_to_Delta_ENU sppDiscrepanciesValues = new SPPresult_to_Delta_ENU(SPPfile);
+        sppDiscrepanciesValues.compute_discrepancies();
     }
     
     public static boolean writeTextFile(String fileName, String fileContent) {
