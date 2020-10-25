@@ -23,13 +23,13 @@ public class Main {
         
         System.out.println("CSV APP TO KML CONVERTER!\n\n\n");
         
-        String root_directory = "C:\\Users\\Rogerio\\Desktop\\";;
+        String root_directory = "C:\\Users\\Rogerio\\Desktop\\";
         
         //=============================================================================================
         
-        String fileNameKML = "RESULT_dia_26_mi9.kml";              
+        String fileNameKML = "RESULT_vlog.kml";              
                         
-        ArrayList<String> sppResult =  readTextFile("C:\\Users\\Rogerio\\Desktop\\RESULT_dia_26_mi9.txt");
+        ArrayList<String> sppResult =  readTextFile("C:\\Users\\Rogerio\\Desktop\\vlog.txt");
        
         KML_Creator newKMLfile = new KML_Creator(fileNameKML);
         
@@ -70,7 +70,7 @@ public class Main {
         // FOR THE ARTICLE !!!!!!!!!!!!!!!!!!!!!!
         //////////////////////////////////////////////////////////////////////////////////////////////////
         ///
-        ArrayList<String> SPPfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\RESULT_dia_26_mi9.txt");
+        ArrayList<String> SPPfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\vlog.txt");
         SPPresult_to_Delta_ENU sppDiscrepanciesValues = new SPPresult_to_Delta_ENU(SPPfile);
         sppDiscrepanciesValues.compute_discrepancies();
     }

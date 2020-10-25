@@ -70,21 +70,22 @@ public class SPPresult_to_Delta_ENU {
             
             String timeStamp  = lineRead[0];
 
-            
+            double deltaX;
+            double deltaY;
+            double deltaZ; 
 //          Calculate Delta_ECEF
-            double deltaX = refX - Double.parseDouble(lineRead[4]);
-            double deltaY = refY - Double.parseDouble(lineRead[5]);
-            double deltaZ = refZ - Double.parseDouble(lineRead[6]);
-            
             try {
+                deltaX = refX - Double.parseDouble(lineRead[4]);
+                deltaY = refY - Double.parseDouble(lineRead[5]);
+                deltaZ = refZ - Double.parseDouble(lineRead[6]);                      
             
-            de_original_values[i] = Double.parseDouble(lineRead[15]);
-            dn_original_values[i] = Double.parseDouble(lineRead[16]);
-            du_original_values[i] = Double.parseDouble(lineRead[17]);
+                de_original_values[i] = Double.parseDouble(lineRead[15]);
+                dn_original_values[i] = Double.parseDouble(lineRead[16]);
+                du_original_values[i] = Double.parseDouble(lineRead[17]);
             
-            averageENUmeters[0] += Double.parseDouble(lineRead[15]);
-            averageENUmeters[1] += Double.parseDouble(lineRead[16]);
-            averageENUmeters[2] += Double.parseDouble(lineRead[17]);
+                averageENUmeters[0] += Double.parseDouble(lineRead[15]);
+                averageENUmeters[1] += Double.parseDouble(lineRead[16]);
+                averageENUmeters[2] += Double.parseDouble(lineRead[17]);
             
             }catch (java.lang.ArrayIndexOutOfBoundsException err) {
                 contLineReadingErrors++;
