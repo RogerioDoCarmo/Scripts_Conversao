@@ -43,6 +43,11 @@ public class CSV_To_Delta_ENU {
         this.fileContent.add(this.mHeader);
     }
     
+        // Vector to calculte the standard deviations
+        double[] de_original_values;
+        double[] dn_original_values;
+        double[] du_original_values;
+    
     public void compute_discrepancies() {
         
         System.out.println("# Epoch (GPS time); Delta_X; Delta_Y; Delta_Z; Delta_E; Delta_N; Delta_U; Error_3D_ENU");
@@ -53,6 +58,10 @@ public class CSV_To_Delta_ENU {
         Error_3D_ENU_epoch   = 0;
         Error_3D_total = 0;
         RMSE_ENU_total = 0;
+        
+        de_original_values = new double[mOriginalCSVcontent.size()];
+        dn_original_values = new double[mOriginalCSVcontent.size()];
+        du_original_values = new double[mOriginalCSVcontent.size()];
         
         for (int i = 1; i < mOriginalCSVcontent.size(); i++) {
             String[] lineRead = mOriginalCSVcontent.get(i).split(CSV_SEPARATOR);
@@ -87,6 +96,10 @@ public class CSV_To_Delta_ENU {
                                      latDegrees,
                                      lonDegrees);
             
+            de_original_values[i] = enuDiscrepancies.enuEast;
+            dn_original_values[i] = enuDiscrepancies.enuNorth;
+            du_original_values[i] = enuDiscrepancies.enuUP;
+            
             averageENUmeters[0] += enuDiscrepancies.enuEast;
             averageENUmeters[1] += enuDiscrepancies.enuNorth;
             averageENUmeters[2] += enuDiscrepancies.enuUP ;
@@ -111,11 +124,26 @@ public class CSV_To_Delta_ENU {
         averageENUmeters[2] = averageENUmeters[2] / mOriginalCSVcontent.size();
         
         System.out.println("\n");
-        System.out.println("Average_E; Average_N; Average_U" );
+        System.out.println("Average_DE; Average_DN; Average_DU" );
         System.out.println(averageENUmeters[0] + "; " + averageENUmeters[1] + "; " + averageENUmeters[2]);
-        //TODO: Compute the STD
         
-        //TODO: Compute the RMSE
+        // Computing the STDs        
+        for (int i = 0; i < de_original_values.length; i++) {
+            stdENUmeters[0] += (de_original_values[i] - averageENUmeters[0]) * (de_original_values[i] - averageENUmeters[0]);
+            stdENUmeters[1] += (dn_original_values[i] - averageENUmeters[1]) * (dn_original_values[i] - averageENUmeters[1]);
+            stdENUmeters[2] += (du_original_values[i] - averageENUmeters[2]) * (du_original_values[i] - averageENUmeters[2]);
+        }
+        
+        stdENUmeters[0] = Math.sqrt(stdENUmeters[0] / stdENUmeters.length - 1);
+        stdENUmeters[1] = Math.sqrt(stdENUmeters[1] / stdENUmeters.length - 1);
+        stdENUmeters[2] = Math.sqrt(stdENUmeters[2] / stdENUmeters.length - 1);
+        
+        System.out.println("");
+        
+        System.out.println("STD_DE; STD_DN; STD_DU" );
+        System.out.println(stdENUmeters[0] + "; " + stdENUmeters[1] + "; " + stdENUmeters[2]);
+                
+        // Computing the RMSE
         RMSE_ENU_total = Math.sqrt( (Error_3D_total/mOriginalCSVcontent.size()) /
                                            mOriginalCSVcontent.size()
                          );
@@ -123,6 +151,7 @@ public class CSV_To_Delta_ENU {
         System.out.println("\n");
         System.out.println("RMSE_ENU_meters");
         System.out.println(RMSE_ENU_total);
+                
     }
     
 }
