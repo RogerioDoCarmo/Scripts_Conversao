@@ -27,11 +27,11 @@ public class Main {
         
         //=============================================================================================
         
-        String fileNameKML = "teste01.kml";              
+        String fileNameKML = "RESULT_dia_26_mi9.kml";              
                         
-        ArrayList<String> sppResult =  readTextFile("C:\\Users\\Rogerio\\Desktop\\spp_Mi9.txt");
+        ArrayList<String> sppResult =  readTextFile("C:\\Users\\Rogerio\\Desktop\\RESULT_dia_26_mi9.txt");
        
-        KML_Creator newKMLfile = new KML_Creator("teste01.kml");
+        KML_Creator newKMLfile = new KML_Creator(fileNameKML);
         
         // TODO: Put in KML_Creator class
         for (int i = 0; i < sppResult.size() - 1; i++) {
@@ -60,7 +60,7 @@ public class Main {
         
         //=============================================================================================
         
-        ArrayList<String> CSVfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\20200929171828.csv");
+        ArrayList<String> CSVfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\dia_26_G2.csv");
         
         CSV_To_Delta_ENU csvLatLonToECEFenuValues = new CSV_To_Delta_ENU(CSVfile);
         csvLatLonToECEFenuValues.compute_discrepancies();
@@ -72,7 +72,6 @@ public class Main {
             FileWriter myWriter = new FileWriter(fileName);
             myWriter.write(fileContent);
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
