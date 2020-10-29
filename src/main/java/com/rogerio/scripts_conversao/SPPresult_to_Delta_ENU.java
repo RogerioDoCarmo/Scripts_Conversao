@@ -127,9 +127,9 @@ public class SPPresult_to_Delta_ENU {
             stdENUmeters[2] += (du_original_values[i] - averageENUmeters[2]) * (du_original_values[i] - averageENUmeters[2]);
         }
         
-        stdENUmeters[0] = Math.sqrt(stdENUmeters[0] / stdENUmeters.length - 1);
-        stdENUmeters[1] = Math.sqrt(stdENUmeters[1] / stdENUmeters.length - 1);
-        stdENUmeters[2] = Math.sqrt(stdENUmeters[2] / stdENUmeters.length - 1);
+        stdENUmeters[0] = Math.sqrt(stdENUmeters[0] / (stdENUmeters.length - 1));
+        stdENUmeters[1] = Math.sqrt(stdENUmeters[1] / (stdENUmeters.length - 1));
+        stdENUmeters[2] = Math.sqrt(stdENUmeters[2] / (stdENUmeters.length - 1));
         
         System.out.println("");
         
@@ -137,10 +137,8 @@ public class SPPresult_to_Delta_ENU {
         System.out.println(stdENUmeters[0] + "; " + stdENUmeters[1] + "; " + stdENUmeters[2]);
                 
         // Computing the RMSE
-        RMSE_ENU_total = Math.sqrt( (Error_3D_total/mOriginalCSVcontent.size()) /
-                                           mOriginalCSVcontent.size()
-                         );
-        
+        RMSE_ENU_total = Math.sqrt( (Error_3D_total /mOriginalCSVcontent.size()) );
+                                 
         System.out.println("\n");
         System.out.println("RMSE_ENU_meters");
         System.out.println(RMSE_ENU_total);

@@ -29,7 +29,7 @@ public class Main {
         
         String fileNameKML = "RESULT_vlog.kml";              
                         
-        ArrayList<String> sppResult =  readTextFile("C:\\Users\\Rogerio\\Desktop\\vlog.txt");
+        ArrayList<String> sppResult =  readTextFile("C:\\Users\\Rogerio\\Desktop\\spp_inct_fct_SPP_result_2020_09_29_17_18_43.txt");
        
         KML_Creator newKMLfile = new KML_Creator(fileNameKML);
         
@@ -59,7 +59,7 @@ public class Main {
         writeTextFile(writingFileName,newKMLfile.getKMLfileContentAsString());
         
         //=============================================================================================        
-//        ArrayList<String> CSVfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\dia_26_G2.csv");
+//        ArrayList<String> CSVfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\20200929171828.csv");
 //        
 //        CSV_To_Delta_ENU csvLatLonToECEFenuValues = new CSV_To_Delta_ENU(CSVfile);
 //        csvLatLonToECEFenuValues.compute_discrepancies();
@@ -70,7 +70,7 @@ public class Main {
         // FOR THE ARTICLE !!!!!!!!!!!!!!!!!!!!!!
         //////////////////////////////////////////////////////////////////////////////////////////////////
         ///
-        ArrayList<String> SPPfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\vlog.txt");
+        ArrayList<String> SPPfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\9.txt");
         SPPresult_to_Delta_ENU sppDiscrepanciesValues = new SPPresult_to_Delta_ENU(SPPfile);
         sppDiscrepanciesValues.compute_discrepancies();
     }
