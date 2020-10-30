@@ -63,6 +63,14 @@ public class SPPresult_to_Delta_ENU {
         dn_original_values = new double[mOriginalCSVcontent.size()];
         du_original_values = new double[mOriginalCSVcontent.size()];
         
+        double max_std_X = Double.MIN_VALUE;
+        double max_std_Y = Double.MIN_VALUE;
+        double max_std_Z = Double.MIN_VALUE;
+        
+        double max_disc_X = Double.MIN_VALUE;
+        double max_disc_Y = Double.MIN_VALUE;
+        double max_disc_Z = Double.MIN_VALUE;
+        
         
         int contLineReadingErrors = 0;
         for (int i = 0; i < mOriginalCSVcontent.size(); i++) {
@@ -78,11 +86,48 @@ public class SPPresult_to_Delta_ENU {
                 deltaX = refX - Double.parseDouble(lineRead[4]);
                 deltaY = refY - Double.parseDouble(lineRead[5]);
                 deltaZ = refZ - Double.parseDouble(lineRead[6]);                      
-            
+                            
+                //Desvio-padrao em X,Y e Z: 8,9 e 10
+                if (Math.abs(Double.parseDouble(lineRead[8])) > max_std_X ){
+                    max_std_X = Double.parseDouble(lineRead[8]);
+                }
+                //Desvio-padrao em X,Y e Z: 8,9 e 10
+                if (Math.abs(Double.parseDouble(lineRead[9])) > max_std_Y ){
+                    max_std_Y = Double.parseDouble(lineRead[9]);
+                }
+                //Desvio-padrao em X,Y e Z: 8,9 e 10
+                if (Math.abs(Double.parseDouble(lineRead[10])) > max_std_Z ){
+                    max_std_Z = Double.parseDouble(lineRead[10]);
+                }
+                
+                if (Double.isInfinite(max_std_X))
+                    max_std_X = Double.MIN_VALUE;
+                if (Double.isInfinite(max_std_Y))
+                    max_std_Y = Double.MIN_VALUE;
+                if (Double.isInfinite(max_std_Z))
+                    max_std_Z = Double.MIN_VALUE;
+                
+                if (Math.abs(max_std_X) > 1000)
+                    max_std_X = Double.MIN_VALUE;
+                if (Math.abs(max_std_Y) > 1000)
+                    max_std_Y = Double.MIN_VALUE;
+                if (Math.abs(max_std_Z) > 1000)
+                    max_std_Z = Double.MIN_VALUE;
+                
                 de_original_values[i] = Double.parseDouble(lineRead[15]);
                 dn_original_values[i] = Double.parseDouble(lineRead[16]);
                 du_original_values[i] = Double.parseDouble(lineRead[17]);
             
+                if (Math.abs(de_original_values[i]) > max_disc_X){
+                    max_disc_X = de_original_values[i];
+                }
+                if (Math.abs(dn_original_values[i]) > max_disc_Y){
+                    max_disc_Y = dn_original_values[i];
+                }
+                if (Math.abs(du_original_values[i]) > max_disc_Z){
+                    max_disc_Z = du_original_values[i];
+                }
+                
                 averageENUmeters[0] += Double.parseDouble(lineRead[15]);
                 averageENUmeters[1] += Double.parseDouble(lineRead[16]);
                 averageENUmeters[2] += Double.parseDouble(lineRead[17]);
@@ -111,6 +156,14 @@ public class SPPresult_to_Delta_ENU {
         
         System.out.println("\nErrors:" + contLineReadingErrors);
 
+        System.out.println("\n");
+        System.out.println("MAX_STD_X_LSA; MAX_STD_Y_LSA; MAX_STD_Z_LSA" );
+        System.out.println(max_std_X + "; " + max_std_Y + "; " + max_std_Z);
+        
+        System.out.println("\n");
+        System.out.println("MAX_DE; MAX_DN; MAX_DU" );
+        System.out.println(max_disc_X + "; " + max_disc_Y + "; " + max_disc_Z);
+        
         
         averageENUmeters[0] = averageENUmeters[0] / mOriginalCSVcontent.size();
         averageENUmeters[1] = averageENUmeters[1] / mOriginalCSVcontent.size();

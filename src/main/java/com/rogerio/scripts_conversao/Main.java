@@ -29,7 +29,7 @@ public class Main {
         
         String fileNameKML = "RESULT_vlog.kml";              
                         
-        ArrayList<String> sppResult =  readTextFile("C:\\Users\\Rogerio\\Desktop\\spp_inct_fct_SPP_result_2020_09_29_17_18_43.txt");
+        ArrayList<String> sppResult =  readTextFile("C:\\Users\\Rogerio\\Desktop\\10.txt");
        
         KML_Creator newKMLfile = new KML_Creator(fileNameKML);
         
@@ -70,7 +70,7 @@ public class Main {
         // FOR THE ARTICLE !!!!!!!!!!!!!!!!!!!!!!
         //////////////////////////////////////////////////////////////////////////////////////////////////
         ///
-        ArrayList<String> SPPfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\9.txt");
+        ArrayList<String> SPPfile = readTextFile("C:\\Users\\Rogerio\\Desktop\\10.txt");
         SPPresult_to_Delta_ENU sppDiscrepanciesValues = new SPPresult_to_Delta_ENU(SPPfile);
         sppDiscrepanciesValues.compute_discrepancies();
     }
